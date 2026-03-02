@@ -1,7 +1,5 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
 - [pbsindex](#pbsindex)
   - [What it supports](#what-it-supports)
   - [Requirements](#requirements)
@@ -10,9 +8,10 @@
     - [2. Decode a specific `.didx`](#2-decode-a-specific-didx)
     - [3. Scan a directory for all `*.pcat1.didx` and decode each](#3-scan-a-directory-for-all-pcat1didx-and-decode-each)
   - [SQLite indexing](#sqlite-indexing)
-  - [Search](#search)
+  - [Searching](#searching)
     - [Latest match only (default)](#latest-match-only-default)
-    - [Show all matches across snapshots](#show-all-matches-across-snapshots)
+    - [Show all matches across all snapshots](#show-all-matches-across-all-snapshots)
+    - [Show all matches across all snapshots for specific host](#show-all-matches-across-all-snapshots-for-specific-host)
   - [CLI help](#cli-help)
   - [Limitations](#limitations)
 
@@ -50,8 +49,8 @@ pbsindex /path/to/catalog.pcat1
 
 ```bash
 pbsindex \
-  --chunk-dir /tmp/backup/.chunks/ \
-  /tmp/backup/host/vm178/2026-03-02T10:47:57Z/catalog.pcat1.didx
+  --chunk-dir /backup/.chunks/ \
+  /backup/host/vm178/2026-03-02T10:47:57Z/catalog.pcat1.didx
 ```
 
 ### 3. Scan a directory for all `*.pcat1.didx` and decode each
@@ -69,8 +68,10 @@ Use `index` to ingest all `.pcat1.didx` files under a host path into SQLite.
 ```bash
 pbsindex index \
   --db /tmp/pcat.db \
-  --scan-dir /tmp/backup/host/vm178 \
-  --chunk-dir /tmp/backup/.chunks/
+  --scan-dir /backup/host/vm178 \
+  --chunk-dir /backup/.chunks/
+indexed /backup/host/vm178/2026-03-02T10:36:15Z/catalog.pcat1.didx entries=1415 uuid=09d276f0-96a0-4e7e-8208-d4b54fcb6ccd
+indexed /backup/host/vm178/2026-03-02T10:47:57Z/catalog.pcat1.didx entries=48820 uuid=7e4086a9-4432-4184-a21f-0aeec2b2de93
 ```
 
 Notes:
@@ -80,7 +81,7 @@ Notes:
 - `--host` is optional. If omitted, host key defaults to `--scan-dir` (normalized path).
   If you want a shorter stable key, pass `--host` explicitly.
 
-## Search
+## Searching
 
 Use `search` to query indexed files for a host.
 
@@ -92,7 +93,16 @@ pbsindex search \
   --file '*iptables-save*'
 ```
 
-### Show all matches across snapshots
+### Show all matches across all snapshots
+
+```bash
+pbsindex search \
+  --db /tmp/pcat.db \
+  --file 'iptables-save' \
+  --all
+```
+
+### Show all matches across all snapshots for specific host
 
 ```bash
 pbsindex search \
@@ -101,6 +111,7 @@ pbsindex search \
   --file 'iptables-save' \
   --all
 ```
+
 
 Wildcard behavior:
 
