@@ -13,7 +13,8 @@
 
 ## Requirements
 
-- Go toolchain (`go run ...`)
+Following executables must be existent alongside pbsindex:
+
 - `sqlite3` CLI (for `index` and `search`)
 - `zstd` CLI (for compressed PBS chunk blobs)
 
@@ -94,3 +95,8 @@ pbsindex --help
 pbsindex index --help
 pbsindex search --help
 ```
+
+## Limitations
+
+Encrypted blobs cannot be indexed.
+
