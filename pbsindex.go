@@ -77,6 +77,9 @@ func (r *catalogReader) rootStart() (uint64, error) {
 	return start, nil
 }
 
+/*
+see catalog_decode_u64 and catalog_decode_i64 in pbs-datastore/src/catalog.rs
+*/
 func decodeU64(rd io.ByteReader) (uint64, error) {
 	var v uint64
 	for i := 0; i < 10; i++ {
