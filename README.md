@@ -4,11 +4,12 @@
 - [About](#about)
 - [What it supports](#what-it-supports)
 - [Requirements](#requirements)
-  - [Usage](#usage)
+- [Usage](#usage)
+  - [Indexing and decoding](#indexing-and-decoding)
     - [1. Decode a plain catalog file](#1-decode-a-plain-catalog-file)
     - [2. Decode a specific `.didx`](#2-decode-a-specific-didx)
     - [3. Scan a directory for all `*.pcat1.didx` and decode each](#3-scan-a-directory-for-all-pcat1didx-and-decode-each)
-  - [SQLite indexing](#sqlite-indexing)
+    - [Creating a SQLite database](#creating-a-sqlite-database)
   - [Searching](#searching)
     - [Latest match only (default)](#latest-match-only-default)
     - [Show all matches across all snapshots](#show-all-matches-across-all-snapshots)
@@ -46,7 +47,9 @@ Following executables must be existent alongside pbsindex:
 sudo apt install sqlite3 zstd
 ```
 
-## Usage
+# Usage
+
+## Indexing and decoding
 
 ### 1. Decode a plain catalog file
 
@@ -80,7 +83,7 @@ pbsindex \
   --scan-dir /backup/host/vm178/
 ```
 
-## SQLite indexing
+### Creating a SQLite database
 
 Use `index` to ingest all `.pcat1.didx` files under a host path into SQLite.
 
