@@ -3,7 +3,7 @@ name: goreleaser
 on:
   push:
     paths:
-      - "main.go"
+      - "pbsindex.go"
     tags:
       - "**"
 
