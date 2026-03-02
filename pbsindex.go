@@ -766,7 +766,8 @@ func runDecode(args []string) error {
 			printDidxIndex(df)
 			catalogData, err := reconstructCatalogFromDidx(didxPath, df, chunkDir)
 			if err != nil {
-				return fmt.Errorf("reconstruct warning (%s): %w", didxPath, err)
+				fmt.Println(fmt.Errorf("reconstruct warning (%s): %w", didxPath, err))
+				continue
 			}
 			r := newCatalogReaderFromBytes(catalogData)
 			if err := dumpCatalogFromReader(r); err != nil {
