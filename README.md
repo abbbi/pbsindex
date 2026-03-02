@@ -61,6 +61,16 @@ pbsindex /path/to/catalog.pcat1
 pbsindex \
   --chunk-dir /backup/.chunks/ \
   /backup/host/vm178/2026-03-02T10:47:57Z/catalog.pcat1.didx
+  d ./backup.pxar.didx
+  d ./backup.pxar.didx/bin
+  l ./backup.pxar.didx/bin/Mail
+  f ./backup.pxar.didx/bin/[ size=55720 mtime=2025-06-04T15:14:05Z
+  f ./backup.pxar.didx/bin/aa-enabled size=18672 mtime=2025-04-10T15:06:25Z
+  f ./backup.pxar.didx/bin/aa-exec size=18672 mtime=2025-04-10T15:06:25Z
+  f ./backup.pxar.didx/bin/aa-features-abi size=18664 mtime=2025-04-10T15:06:25Z
+  l ./backup.pxar.didx/bin/apropos
+  f ./backup.pxar.didx/bin/apt size=18752 mtime=2025-06-24T17:02:46Z
+  [..]
 ```
 
 ### 3. Scan a directory for all `*.pcat1.didx` and decode each
