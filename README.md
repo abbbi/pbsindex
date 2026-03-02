@@ -90,7 +90,8 @@ Use `search` to query indexed files for a host.
 ```bash
 pbsindex search \
   --db /tmp/pcat.db \
-  --file '*iptables-save*'
+  --file 'iptables'
+  snapshot=2026-03-02T10:47:57Z host=/tmp/backup/host/vm178 uuid=7e4086a9-4432-4184-a21f-0aeec2b2de93 archive=JO.pxar.didx type=l path=/JO.pxar.didx/sbin/iptables
 ```
 
 ### Show all matches across all snapshots
@@ -98,8 +99,12 @@ pbsindex search \
 ```bash
 pbsindex search \
   --db /tmp/pcat.db \
-  --file 'iptables-save' \
+  --file 'iptables' \
   --all
+ snapshot=2026-03-02T10:47:57Z host=/tmp/backup/host/vm178 uuid=7e4086a9-4432-4184-a21f-0aeec2b2de93 archive=JO.pxar.didx type=l path=/JO.pxar.didx/sbin/iptables
+ snapshot=2026-03-02T10:47:57Z host=/tmp/backup/host/vm178 uuid=7e4086a9-4432-4184-a21f-0aeec2b2de93 archive=JO.pxar.didx type=f path=/JO.pxar.didx/share/bash-completion/completions/iptables size=2109 mtime=2025-01-26T19:49:00Z
+ snapshot=2026-03-02T10:47:57Z host=/tmp/backup/host/vm178 uuid=7e4086a9-4432-4184-a21f-0aeec2b2de93 archive=JO.pxar.didx type=d path=/JO.pxar.didx/share/doc/iptables
+ snapshot=2026-03-02T10:47:57Z host=/tmp/backup/host/vm178 uuid=7e4086a9-4432-4184-a21f-0aeec2b2de93 archive=JO.pxar.didx type=d path=/JO.pxar.didx/share/iptables
 ```
 
 ### Show all matches across all snapshots for specific host
@@ -108,7 +113,7 @@ pbsindex search \
 pbsindex search \
   --db /tmp/pcat.db \
   --host backup/host/vm178 \
-  --file 'iptables-save' \
+  --file 'iptables' \
   --all
 ```
 
