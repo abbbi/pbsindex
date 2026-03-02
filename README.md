@@ -1,26 +1,25 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-- [about](#about)
 
 - [about](#about)
 - [What it supports](#what-it-supports)
 - [Requirements](#requirements)
-- [Usage](#usage)
-  - [1. Decode a plain catalog file](#1-decode-a-plain-catalog-file)
-  - [2. Decode a specific `.didx`](#2-decode-a-specific-didx)
-  - [3. Scan a directory for all `*.pcat1.didx` and decode each](#3-scan-a-directory-for-all-pcat1didx-and-decode-each)
-- [SQLite indexing](#sqlite-indexing)
-- [Searching](#searching)
-  - [Latest match only (default)](#latest-match-only-default)
-  - [Show all matches across all snapshots](#show-all-matches-across-all-snapshots)
-  - [Show all matches across all snapshots for specific host](#show-all-matches-across-all-snapshots-for-specific-host)
-- [CLI help](#cli-help)
-- [Limitations](#limitations)
-- [Links](#links)
+  - [Usage](#usage)
+    - [1. Decode a plain catalog file](#1-decode-a-plain-catalog-file)
+    - [2. Decode a specific `.didx`](#2-decode-a-specific-didx)
+    - [3. Scan a directory for all `*.pcat1.didx` and decode each](#3-scan-a-directory-for-all-pcat1didx-and-decode-each)
+  - [SQLite indexing](#sqlite-indexing)
+  - [Searching](#searching)
+    - [Latest match only (default)](#latest-match-only-default)
+    - [Show all matches across all snapshots](#show-all-matches-across-all-snapshots)
+    - [Show all matches across all snapshots for specific host](#show-all-matches-across-all-snapshots-for-specific-host)
+  - [CLI help](#cli-help)
+  - [Limitations](#limitations)
+  - [Links](#links)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## about
+# about
 
 `pbsindex` decodes Proxmox `catalog.pcat1` files and dynamic index files
 (`.pcat1.didx`), and can index catalog contents into SQLite for fast search.
@@ -28,7 +27,7 @@
 Using this tool, you can create a searchable file index for all of your
 existing file backups within a proxmox backup server datastore.
 
-## What it supports
+# What it supports
 
 - Decode plain `catalog.pcat1` and print entries.
 - Decode `catalog.pcat1.didx` by resolving chunk blobs from a chunk directory.
@@ -36,7 +35,7 @@ existing file backups within a proxmox backup server datastore.
 - Index decoded file lists into SQLite.
 - Search indexed files by host, with wildcard support.
 
-## Requirements
+# Requirements
 
 Following executables must be existent alongside pbsindex:
 
