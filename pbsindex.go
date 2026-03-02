@@ -685,7 +685,7 @@ func buildIndexSQL(hostKey, didxPath string, df *didxFile, entries []indexedEntr
 		}
 		fmt.Fprintf(&b,
 			"INSERT INTO file_entry(archive_id, path, name, entry_type, size, mtime) VALUES ((SELECT id FROM archive WHERE didx_uuid=%s), %s, %s, %s, %s, %s);\n",
-			sqlQuote(didxUUID), sqlQuote(e.Path), sqlQuote(e.Name), sqlQuote(e.EntryType), sizeVal, mtimeVal)
+			sqlQuote(didxUUID), sqlQuote(filepath.Dir(e.Path)), sqlQuote(e.Name), sqlQuote(e.EntryType), sizeVal, mtimeVal)
 	}
 
 	b.WriteString("COMMIT;\n")
@@ -945,7 +945,7 @@ func runSearch(args []string) error {
 	}
 
 	sql := `
-SELECT s.snapshot_time, h.host_key, a.didx_uuid, a.archive_name, fe.path, fe.entry_type,
+SELECT s.snapshot_time, h.host_key, a.archive_name, fe.path, fe.name, fe.entry_type,
        COALESCE(CAST(fe.size AS TEXT), ''), COALESCE(CAST(fe.mtime AS TEXT), '')
 FROM file_entry fe
 JOIN archive a ON a.id = fe.archive_id
@@ -971,7 +971,7 @@ ORDER BY s.snapshot_time DESC` + limitClause + `;`
 			fmt.Println(line)
 			continue
 		}
-		fmt.Printf("snapshot=%s host=%s uuid=%s archive=%s type=%s path=%s", fields[0], fields[1], fields[2], fields[3], fields[5], fields[4])
+		fmt.Printf("snapshot=%s host=%s archive=%s type=%s path=%s/%s", fields[0], fields[1], fields[2], fields[5], fields[3], fields[4])
 		if fields[6] != "" {
 			fmt.Printf(" size=%s", fields[6])
 		}
