@@ -1,6 +1,8 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 - [pbsindex](#pbsindex)
+
+- [pbsindex](#pbsindex)
   - [What it supports](#what-it-supports)
   - [Requirements](#requirements)
   - [Usage](#usage)
@@ -14,6 +16,7 @@
     - [Show all matches across all snapshots for specific host](#show-all-matches-across-all-snapshots-for-specific-host)
   - [CLI help](#cli-help)
   - [Limitations](#limitations)
+  - [Links](#links)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
