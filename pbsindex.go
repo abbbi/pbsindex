@@ -413,7 +413,7 @@ func readAndVerifyChunk(path string, want [32]byte) ([]byte, bool, error) {
 
 	sum := sha256.Sum256(decoded)
 	if !bytes.Equal(sum[:], want[:]) {
-		return nil, false, nil
+		return nil, false, fmt.Errorf("error during chunk blob verify: sha256 mismatch")
 	}
 	return decoded, true, nil
 }
