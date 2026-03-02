@@ -1,6 +1,7 @@
 # catalog_dump
 
-`pbsindex` decodes Proxmox `catalog.pcat1` files and dynamic index files (`.pcat1.didx`), and can index catalog contents into SQLite for fast search.
+`pbsindex` decodes Proxmox `catalog.pcat1` files and dynamic index files
+(`.pcat1.didx`), and can index catalog contents into SQLite for fast search.
 
 ## What it supports
 
