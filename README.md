@@ -43,6 +43,10 @@ Following executables must be existent alongside pbsindex:
 - `sqlite3` CLI (for `index` and `search`)
 - `zstd` CLI (for compressed PBS chunk blobs)
 
+```bash
+sudo apt install sqlite3 zstd
+```
+
 ## Usage
 
 ### 1. Decode a plain catalog file
