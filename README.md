@@ -57,8 +57,8 @@ pbsindex \
 
 ```bash
 pbsindex \
-  --chunk-dir /tmp/backup/.chunks/ \
-  --scan-dir /tmp/backup/host/vm178/
+  --chunk-dir /backup/.chunks/ \
+  --scan-dir /backup/host/vm178/
 ```
 
 ## SQLite indexing
