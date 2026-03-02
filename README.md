@@ -15,8 +15,8 @@
     - [Show all matches across all snapshots](#show-all-matches-across-all-snapshots)
     - [Show all matches across all snapshots for specific host](#show-all-matches-across-all-snapshots-for-specific-host)
   - [CLI help](#cli-help)
-  - [Limitations](#limitations)
-  - [Links](#links)
+- [Limitations](#limitations)
+- [Links](#links)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -154,10 +154,10 @@ pbsindex index --help
 pbsindex search --help
 ```
 
-## Limitations
+# Limitations
 
 Encrypted blobs cannot be indexed.
 
-## Links
+# Links
 
  https://pbs.proxmox.com/docs/file-formats.html
