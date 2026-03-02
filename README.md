@@ -1,7 +1,7 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [about](#about)
+- [About](#about)
 - [What it supports](#what-it-supports)
 - [Requirements](#requirements)
   - [Usage](#usage)
@@ -19,7 +19,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# about
+# About
 
 `pbsindex` decodes Proxmox `catalog.pcat1` files and dynamic index files
 (`.pcat1.didx`), and can index catalog contents into SQLite for fast search.
