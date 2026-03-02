@@ -2,22 +2,25 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 - [pbsindex](#pbsindex)
 
-- [What it supports](#what-it-supports)
-- [Requirements](#requirements)
-- [Usage](#usage)
-  - [1. Decode a plain catalog file](#1-decode-a-plain-catalog-file)
-  - [2. Decode a specific `.didx`](#2-decode-a-specific-didx)
-  - [3. Scan a directory for all `*.pcat1.didx` and decode each](#3-scan-a-directory-for-all-pcat1didx-and-decode-each)
-- [SQLite indexing](#sqlite-indexing)
-- [Searching](#searching)
-  - [Latest match only (default)](#latest-match-only-default)
-  - [Show all matches across all snapshots](#show-all-matches-across-all-snapshots)
-  - [Show all matches across all snapshots for specific host](#show-all-matches-across-all-snapshots-for-specific-host)
-- [CLI help](#cli-help)
-- [Limitations](#limitations)
-- [Links](#links)
+- [about](#about)
+  - [What it supports](#what-it-supports)
+  - [Requirements](#requirements)
+  - [Usage](#usage)
+    - [1. Decode a plain catalog file](#1-decode-a-plain-catalog-file)
+    - [2. Decode a specific `.didx`](#2-decode-a-specific-didx)
+    - [3. Scan a directory for all `*.pcat1.didx` and decode each](#3-scan-a-directory-for-all-pcat1didx-and-decode-each)
+  - [SQLite indexing](#sqlite-indexing)
+  - [Searching](#searching)
+    - [Latest match only (default)](#latest-match-only-default)
+    - [Show all matches across all snapshots](#show-all-matches-across-all-snapshots)
+    - [Show all matches across all snapshots for specific host](#show-all-matches-across-all-snapshots-for-specific-host)
+  - [CLI help](#cli-help)
+  - [Limitations](#limitations)
+  - [Links](#links)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# about
 
 `pbsindex` decodes Proxmox `catalog.pcat1` files and dynamic index files
 (`.pcat1.didx`), and can index catalog contents into SQLite for fast search.
