@@ -22,6 +22,9 @@
 `pbsindex` decodes Proxmox `catalog.pcat1` files and dynamic index files
 (`.pcat1.didx`), and can index catalog contents into SQLite for fast search.
 
+Using this tool, you can create a searchable file index for all of your
+existing file backups within a proxmox backup server datastore.
+
 ## What it supports
 
 - Decode plain `catalog.pcat1` and print entries.
