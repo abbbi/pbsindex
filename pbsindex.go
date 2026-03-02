@@ -829,6 +829,9 @@ func runDecode(args []string) error {
 	}
 
 	if strings.HasSuffix(path, ".didx") {
+		if chunkDir == "" {
+			return fmt.Errorf("didx parse error: --chunk-dir option required: please specify")
+		}
 		df, err := parseDidx(path)
 		if err != nil {
 			return fmt.Errorf("didx parse error: %w", err)
