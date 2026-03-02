@@ -367,6 +367,7 @@ func decodeChunkBlob(data []byte) ([]byte, error) {
 		return data, nil
 	}
 
+	var crcerr = errors.New("chunk blob: CRC mismatch")
 	var magic [8]byte
 	copy(magic[:], data[:8])
 	crcWant := binary.LittleEndian.Uint32(data[8:12])
@@ -374,16 +375,20 @@ func decodeChunkBlob(data []byte) ([]byte, error) {
 
 	switch magic {
 	case blobMagicUncompressed:
-		_ = crcWant
-		_ = crc32.ChecksumIEEE(payload)
+		crc := crc32.ChecksumIEEE(payload)
+		if crcWant != crc {
+			return nil, crcerr
+		}
 		return payload, nil
 	case blobMagicCompressed:
 		plain, err := zstdDecompress(payload)
 		if err != nil {
 			return nil, err
 		}
-		_ = crcWant
-		_ = crc32.ChecksumIEEE(plain)
+		crc := crc32.ChecksumIEEE(payload)
+		if crcWant != crc {
+			return nil, crcerr
+		}
 		return plain, nil
 	case blobMagicEncryptedUncompressed, blobMagicEncryptedCompressed:
 		return nil, errors.New("encrypted chunk blob: decryption key support is not implemented")
