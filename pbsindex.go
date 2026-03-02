@@ -867,7 +867,8 @@ func runIndex(args []string) error {
 		}
 		catalogData, err := reconstructCatalogFromDidx(didxPath, df, chunkDir)
 		if err != nil {
-			return fmt.Errorf("reconstruct error (%s): %w", didxPath, err)
+			fmt.Println(fmt.Errorf("reconstruct error (%s): %w", didxPath, err))
+			continue
 		}
 		entries, err := collectCatalogEntries(catalogData)
 		if err != nil {
