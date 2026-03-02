@@ -1,3 +1,23 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [pbsindex](#pbsindex)
+  - [What it supports](#what-it-supports)
+  - [Requirements](#requirements)
+  - [Usage](#usage)
+    - [1. Decode a plain catalog file](#1-decode-a-plain-catalog-file)
+    - [2. Decode a specific `.didx`](#2-decode-a-specific-didx)
+    - [3. Scan a directory for all `*.pcat1.didx` and decode each](#3-scan-a-directory-for-all-pcat1didx-and-decode-each)
+  - [SQLite indexing](#sqlite-indexing)
+  - [Search](#search)
+    - [Latest match only (default)](#latest-match-only-default)
+    - [Show all matches across snapshots](#show-all-matches-across-snapshots)
+  - [CLI help](#cli-help)
+  - [Limitations](#limitations)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # pbsindex
 
 `pbsindex` decodes Proxmox `catalog.pcat1` files and dynamic index files
