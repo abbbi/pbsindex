@@ -69,6 +69,32 @@ type catalogReader struct {
 	closer io.Closer
 }
 
+type byteReader struct {
+	data []byte
+	pos  int
+}
+
+type didxEntry struct {
+	EndOffset uint64
+	Digest    [32]byte
+}
+
+type didxFile struct {
+	UUID      [16]byte
+	CTime     uint64
+	IndexSum  [32]byte
+	Entries   []didxEntry
+	TotalSize uint64
+}
+
+type indexedEntry struct {
+	Path      string
+	Name      string
+	EntryType string
+	Size      *uint64
+	Mtime     *int64
+}
+
 func newCatalogReader(path string) (*catalogReader, error) {
 	f, err := os.Open(path)
 	if err != nil {
@@ -285,11 +311,6 @@ func (r *catalogReader) dumpDir(prefix string, start uint64) error {
 	return nil
 }
 
-type byteReader struct {
-	data []byte
-	pos  int
-}
-
 func (r *byteReader) Read(p []byte) (int, error) {
 	if r.pos >= len(r.data) {
 		return 0, io.EOF
@@ -313,19 +334,6 @@ func (r *byteReader) ReadByte() (byte, error) {
 
 func (r *byteReader) remaining() int {
 	return len(r.data) - r.pos
-}
-
-type didxEntry struct {
-	EndOffset uint64
-	Digest    [32]byte
-}
-
-type didxFile struct {
-	UUID      [16]byte
-	CTime     uint64
-	IndexSum  [32]byte
-	Entries   []didxEntry
-	TotalSize uint64
 }
 
 func parseDidx(path string) (*didxFile, error) {
@@ -377,14 +385,6 @@ func parseDidx(path string) (*didxFile, error) {
 	out.TotalSize = prev
 
 	return out, nil
-}
-
-type indexedEntry struct {
-	Path      string
-	Name      string
-	EntryType string
-	Size      *uint64
-	Mtime     *int64
 }
 
 func formatUUID(b [16]byte) string {
