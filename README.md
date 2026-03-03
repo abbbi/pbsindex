@@ -23,10 +23,11 @@
 # About
 
 `pbsindex` decodes Proxmox `catalog.pcat1` files and dynamic index files
-(`.pcat1.didx`), and can index catalog contents into SQLite for fast search.
+(`.pcat1.didx`).
 
-Using this tool, you can create a searchable file index for all of your
-existing file backups within a proxmox backup server datastore.
+You can use it to generate a file index for your complete proxmox backup server
+datastores without having to mount the backup snapshots.
+
 
 # What it supports
 
@@ -44,7 +45,7 @@ Following executables must be existent alongside pbsindex:
 - `zstd` CLI (for compressed PBS chunk blobs)
 
 ```bash
-sudo apt install sqlite3 zstd
+    sudo apt install sqlite3 zstd
 ```
 
 # Usage
@@ -53,11 +54,17 @@ sudo apt install sqlite3 zstd
 
 ### 1. Decode a plain catalog file
 
+If you've downloaded the pcat1 file via the PBS Webfrontend you can decode
+it via:
+
 ```bash
 pbsindex /path/to/catalog.pcat1
 ```
 
 ### 2. Decode a specific `.didx`
+
+If you want to show the contents for a specific backup directly from the
+existing backup datastore use:
 
 ```bash
 pbsindex \
@@ -76,6 +83,8 @@ pbsindex \
 ```
 
 ### 3. Scan a directory for all `*.pcat1.didx` and decode each
+
+To scan all existing file backups within a datastore use:
 
 ```bash
 pbsindex \
