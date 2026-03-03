@@ -78,3 +78,14 @@ type indexedEntry struct {
 	Size      *uint64
 	Mtime     *int64
 }
+
+type Result struct {
+	SnapshotTime string `json:"snapshot_time"`
+	HostKey      string `json:"host_key"`
+	ArchiveName  string `json:"archive_name"`
+	Path         string `json:"path"`
+	Name         string `json:"name"`
+	Size         int64  `json:"size"`
+	Mtime        int64  `json:"mtime"`
+	Type         string `json:"entry_type"`
+}

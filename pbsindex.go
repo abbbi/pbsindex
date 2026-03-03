@@ -953,17 +953,6 @@ JOIN host h ON h.id = s.host_id
 WHERE ` + whereExpr + hostFilter + `
 ORDER BY s.snapshot_time DESC` + limitClause + `;`
 
-	type Result struct {
-		SnapshotTime string `json:"snapshot_time"`
-		HostKey      string `json:"host_key"`
-		ArchiveName  string `json:"archive_name"`
-		Path         string `json:"path"`
-		Name         string `json:"name"`
-		Size         int64  `json:"size"`
-		Mtime        int64  `json:"mtime"`
-		Type         string `json:"entry_type"`
-	}
-
 	var result []Result
 
 	out, err := runSQLiteQuery(dbPath, sql)
