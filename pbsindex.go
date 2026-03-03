@@ -21,6 +21,7 @@ import (
 	"crypto/sha256"
 	"encoding/binary"
 	"encoding/hex"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"hash/crc32"
@@ -30,7 +31,6 @@ import (
 	"os/exec"
 	"path/filepath"
 	"sort"
-	"strconv"
 	"strings"
 	"time"
 )
@@ -568,8 +568,8 @@ func runSQLiteExec(dbPath, sql string) error {
 	return nil
 }
 
-func runSQLiteQuery(dbPath, sql string) (string, error) {
-	cmd := exec.Command("sqlite3", "-noheader", "-separator", "\t", dbPath, sql)
+func runSQLiteQuery(dbPath, sql string) (bytes.Buffer, error) {
+	cmd := exec.Command("sqlite3", "-json", dbPath, sql)
 	var out bytes.Buffer
 	var errBuf bytes.Buffer
 	cmd.Stdout = &out
@@ -579,9 +579,9 @@ func runSQLiteQuery(dbPath, sql string) (string, error) {
 		if msg == "" {
 			msg = err.Error()
 		}
-		return "", errors.New(msg)
+		return out, errors.New(msg)
 	}
-	return out.String(), nil
+	return out, nil
 }
 
 func ensureSchema(dbPath string) error {
@@ -945,8 +945,7 @@ func runSearch(args []string) error {
 	}
 
 	sql := `
-SELECT s.snapshot_time, h.host_key, a.archive_name, fe.path, fe.name, fe.entry_type,
-       COALESCE(CAST(fe.size AS TEXT), ''), COALESCE(CAST(fe.mtime AS TEXT), '')
+SELECT s.snapshot_time, h.host_key, a.archive_name, fe.path, fe.name, fe.entry_type, fe.size, fe.mtime
 FROM file_entry fe
 JOIN archive a ON a.id = fe.archive_id
 JOIN snapshot s ON s.id = a.snapshot_id
@@ -954,33 +953,37 @@ JOIN host h ON h.id = s.host_id
 WHERE ` + whereExpr + hostFilter + `
 ORDER BY s.snapshot_time DESC` + limitClause + `;`
 
+	type Result struct {
+		SnapshotTime string `json:"snapshot_time"`
+		HostKey      string `json:"host_key"`
+		ArchiveName  string `json:"archive_name"`
+		Path         string `json:"path"`
+		Name         string `json:"name"`
+		Size         int64  `json:"size"`
+		Mtime        int64  `json:"mtime"`
+		Type         string `json:"entry_type"`
+	}
+
+	var result []Result
+
 	out, err := runSQLiteQuery(dbPath, sql)
 	if err != nil {
 		return fmt.Errorf("search query error: %w", err)
 	}
-	out = strings.TrimRight(out, "\r\n")
-	if out == "" {
-		fmt.Println("no matches")
+	json.Unmarshal(out.Bytes(), &result)
+
+	if len(result) < 1 {
+		fmt.Println("No matches found")
 		return nil
 	}
 
-	lines := strings.Split(out, "\n")
-	for _, line := range lines {
-		fields := strings.Split(line, "\t")
-		if len(fields) < 8 {
-			fmt.Println(line)
-			continue
+	for _, entry := range result {
+		fmt.Printf("snapshot=%s host=%s archive=%s type=%s path=%s/%s", entry.SnapshotTime, entry.HostKey, entry.ArchiveName, entry.Type, entry.Path, entry.Name)
+		if entry.Size > 0 {
+			fmt.Printf(" size=%d", entry.Size)
 		}
-		fmt.Printf("snapshot=%s host=%s archive=%s type=%s path=%s/%s", fields[0], fields[1], fields[2], fields[5], fields[3], fields[4])
-		if fields[6] != "" {
-			fmt.Printf(" size=%s", fields[6])
-		}
-		if fields[7] != "" {
-			if sec, err := strconv.ParseInt(fields[7], 10, 64); err == nil {
-				fmt.Printf(" mtime=%s", time.Unix(sec, 0).UTC().Format(time.RFC3339))
-			} else {
-				fmt.Printf(" mtime=%s", fields[7])
-			}
+		if entry.Mtime != 0 {
+			fmt.Printf(" mtime=%s", time.Unix(entry.Mtime, 0).UTC().Format(time.RFC3339))
 		}
 		fmt.Println()
 	}
