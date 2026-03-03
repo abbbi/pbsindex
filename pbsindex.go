@@ -778,6 +778,9 @@ func runDecode(args []string) error {
 	}
 
 	if strings.HasSuffix(path, ".didx") {
+		if !strings.HasSuffix(path, ".pcat1.didx") {
+			return fmt.Errorf("Only files ending with .pcat1.didx are supported")
+		}
 		if chunkDir == "" {
 			return fmt.Errorf("didx parse error: --chunk-dir option required: please specify")
 		}
